@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace CleanSolution
 {
-    public partial class Form1 : Form
+    public partial class Main : Form
     {
-        public Form1()
+        public Main()
         {
             InitializeComponent();
+        }
+
+        private void BrowseButton_Click(object sender, EventArgs e)
+        {
+            var dialogResult = folderBrowserDialog.ShowDialog();
         }
     }
 }
