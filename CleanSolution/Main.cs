@@ -34,19 +34,29 @@ namespace CleanSolution
 
         private void Cleanup(string solutionDirectory)
         {
-            output.Text = string.Empty;
+            ClearOutput();
             var directory = new DirectoryInfo(solutionDirectory);
-            var builddirs = new[] { "bin", "obj" };
-
-
+            var directories = new[] { "bin", "obj" };
+            
             foreach (var projectDirectory in directory.GetDirectories())
             {
-                output.AppendText(projectDirectory.Name);
-                output.AppendText(Environment.NewLine);
-                Console.WriteLine(projectDirectory.Name);
+                AddOutput(projectDirectory.Name);
 
-                foreach (var builddir in projectDirectory.GetDirectories().Where(d => builddirs.Contains(d.Name))) builddir.Delete(true);
+                foreach (var builddir in projectDirectory.GetDirectories().Where(d => directories.Contains(d.Name))) builddir.Delete(true);
             }
+
+            AddOutput("Clean is done");
+        }
+
+        private void AddOutput(string text)
+        {
+            output.AppendText(text);
+            output.AppendText(Environment.NewLine);
+        }
+
+        private void ClearOutput()
+        {
+            output.Text = string.Empty;
         }
     }
 }
